@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echidna — Admin Backoffice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        body {
+            font-family: 'Figtree', sans-serif;
+            background: #f3f4f6;
+            color: #1e1b4b;
+            min-height: 100vh
+        }
+
+        .hdr {
+            background: #1e1b4b;
+            padding: 0 24px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50
+        }
+
+        .hdr-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            height: 100%
+        }
+
+        .hdr-brand img.logo {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            display: block
+        }
+
+        .hdr-brand .sep {
+            color: #6366f1;
+            font-size: 24px;
+            font-weight: 300
+        }
+
+        .hdr-brand .portal {
+            color: #818cf8;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .hdr-user {
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .hdr-user .name {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600
+        }
+
+        .hdr-user .role {
+            color: #94a3b8;
+            font-size: 10px
+        }
+
+        .hdr-user .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #818cf8;
+            color: #1e1b4b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px
+        }
+
+        .logout-btn {
+            background: none;
+            border: 1px solid #334155;
+            color: #94a3b8;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            margin-left: 12px
+        }
+
+        .logout-btn:hover {
+            border-color: #ef4444;
+            color: #ef4444
+        }
+
+        /* Login */
+        .login-wrap {
+            min-height: calc(100vh - 56px);
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .login-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 36px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+            border: 1px solid #e5e7eb
+        }
+
+        .login-card h1 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 3px
+        }
+
+        .login-card p {
+            font-size: 12px;
+            color: #6b7280;
+            margin-bottom: 20px
+        }
+
+        .fg {
+            margin-bottom: 14px
+        }
+
+        .fg label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #374151
+        }
+
+        .fg input,
+        .fg select,
+        .fg textarea {
+            width: 100%;
+            padding: 9px 11px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 13px;
+            outline: none;
+            font-family: inherit
+        }
+
+        .fg input:focus,
+        .fg select:focus,
+        .fg textarea:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 0 2px rgba(0, 227, 119, .15)
+        }
+
+        .fg textarea {
+            resize: vertical;
+            min-height: 80px
+        }
+
+        .btn-p {
+            width: 100%;
+            padding: 10px;
+            background: #818cf8;
+            color: #1e1b4b;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        .btn-p:hover {
+            background: #00c968
+        }
+
+        .btn-p:disabled {
+            opacity: .5;
+            cursor: not-allowed
+        }
+
+        .err-msg {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 9px 11px;
+            border-radius: 7px;
+            font-size: 12px;
+            margin-bottom: 14px
+        }
+
+        /* Main */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e1b4b, #312e81);
+            padding: 20px 24px;
+            border-radius: 12px;
+            margin-bottom: 16px
+        }
+
+        .hero h1 {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 800
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-top: 3px
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 16px
+        }
+
+        .sc {
+            background: #fff;
+            border-radius: 10px;
+            padding: 14px 16px;
+            border: 1px solid #e5e7eb
+        }
+
+        .sc .label {
+            font-size: 10px;
+            color: #6b7280;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        .sc .val {
+            font-size: 24px;
+            font-weight: 800;
+            margin-top: 2px
+        }
+
+        .sc .sub {
+            font-size: 10px;
+            color: #9ca3af;
+            margin-top: 1px
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 3px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 4px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 16px;
+            flex-wrap: wrap
+        }
+
+        .tab-btn {
+            padding: 7px 14px;
+            border-radius: 7px;
+            border: none;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            background: transparent;
+            color: #6b7280;
+            transition: all .2s
+        }
+
+        .tab-btn.active {
+            background: #818cf8;
+            color: #1e1b4b;
+            font-weight: 700
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #f9fafb
+        }
+
+        /* Card/Table */
+        .card {
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            overflow: hidden
+        }
+
+        .card-hdr {
+            padding: 12px 18px;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .card-hdr h2 {
+            font-size: 13px;
+            font-weight: 700
+        }
+
+        .ref-btn {
+            font-size: 11px;
+            color: #818cf8;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-weight: 600
+        }
+
+        .ref-btn:hover {
+            text-decoration: underline
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        thead {
+            background: #f9fafb
+        }
+
+        th {
+            padding: 8px 18px;
+            text-align: left;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #6b7280;
+            letter-spacing: .5px
+        }
+
+        td {
+            padding: 10px 18px;
+            font-size: 12px;
+            border-top: 1px solid #f3f4f6
+        }
+
+        tr:hover {
+            background: #fafafa
+        }
+
+        .empty {
+            padding: 40px 18px;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 12px
+        }
+
+        /* Badges & Buttons */
+        .badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 99px;
+            display: inline-block
+        }
+
+        .badge-pend {
+            background: #fef3c7;
+            color: #92400e
+        }
+
+        .badge-pub {
+            background: #d1fae5;
+            color: #065f46
+        }
+
+        .badge-rej {
+            background: #fee2e2;
+            color: #991b1b
+        }
+
+        .btn-s {
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: all .15s
+        }
+
+        .btn-a {
+            background: #818cf8;
+            color: #1e1b4b
+        }
+
+        .btn-a:hover {
+            background: #00c968
+        }
+
+        .btn-r {
+            background: #fef2f2;
+            color: #dc2626
+        }
+
+        .btn-r:hover {
+            background: #fee2e2
+        }
+
+        .btn-e {
+            background: #eff6ff;
+            color: #2563eb
+        }
+
+        .btn-e:hover {
+            background: #dbeafe
+        }
+
+        .btn-d {
+            background: #fef2f2;
+            color: #dc2626
+        }
+
+        .btn-d:hover {
+            background: #fee2e2
+        }
+
+        .btn-cancel {
+            background: none;
+            color: #9ca3af;
+            border: none;
+            font-size: 10px;
+            cursor: pointer
+        }
+
+        .btn-s:disabled {
+            opacity: .5;
+            cursor: not-allowed
+        }
+
+        .inf {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap
+        }
+
+        .inf input,
+        .inf select {
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 3px 7px;
+            font-size: 11px;
+            outline: none
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, .5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100
+        }
+
+        .modal {
+            background: #fff;
+            border-radius: 14px;
+            padding: 28px;
+            width: 100%;
+            max-width: 560px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .15);
+            max-height: 85vh;
+            overflow-y: auto
+        }
+
+        .modal h2 {
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 16px
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 18px;
+            justify-content: flex-end
+        }
+
+        .modal-actions button {
+            padding: 8px 18px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 64px;
+            right: 20px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 999;
+            max-width: 360px;
+            animation: slideIn .3s ease
+        }
+
+        .toast-s {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0
+        }
+
+        .toast-e {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1
+            }
+        }
+
+        /* Settings card */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 20px
+        }
+
+        .scard {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 18px;
+            border: 1px solid #e5e7eb
+        }
+
+        .scard h3 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 4px
+        }
+
+        .scard p {
+            font-size: 11px;
+            color: #6b7280;
+            margin-bottom: 12px
+        }
+
+        .scard input,
+        .scard select {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none
+        }
+
+        .scard input:focus,
+        .scard select:focus {
+            border-color: #818cf8
+        }
+
+        .save-bar {
+            padding: 14px 20px;
+            border-top: 1px solid #f3f4f6;
+            text-align: right
+        }
+
+        @media(max-width:768px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hdr">
+        <div class="hdr-brand">
+            <span class="portal" style="font-size:1.15rem;font-weight:800;letter-spacing:1px;">Admin Backoffice</span>
+
+        </div>
+        <div class="hdr-user" id="headerUser" style="display:none">
+            <div>
+                <div class="name" id="userName"></div>
+                <div class="role">BUSINESS ADMIN</div>
+            </div>
+            <div class="avatar" id="userAvatar"></div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div id="loginScreen" class="login-wrap">
+        <div class="login-card">
+            <h1>Admin Login</h1>
+            <p>Sign in with your Business Admin credentials</p>
+            <div id="loginError" class="err-msg" style="display:none"></div>
+            <div class="fg"><label>Email</label><input type="email" id="loginEmail" placeholder="admin@company.com" />
+            </div>
+            <div class="fg"><label>Password</label><input type="password" id="loginPassword"
+                    placeholder="Enter password" /></div>
+            <button class="btn-p" id="loginBtn" onclick="login()">Sign In</button>
+        </div>
+    </div>
+
+    <div id="dashboard" style="display:none">
+        <div class="main">
+            <div class="hero">
+                <h1>Admin Backoffice</h1>
+                <p>Manage posts, comments, settings, and resources</p>
+            </div>
+            <div class="stats">
+                <div class="sc">
+                    <div class="label">Pending Posts</div>
+                    <div class="val" id="sPend">0</div>
+                    <div class="sub">awaiting review</div>
+                </div>
+                <div class="sc">
+                    <div class="label">Published Posts</div>
+                    <div class="val" id="sPub">0</div>
+                    <div class="sub">live on portal</div>
+                </div>
+                <div class="sc">
+                    <div class="label">Rejected Posts</div>
+                    <div class="val" id="sRej">0</div>
+                    <div class="sub">declined</div>
+                </div>
+                <div class="sc">
+                    <div class="label">Resources</div>
+                    <div class="val" id="sRes">0</div>
+                    <div class="sub">documents</div>
+                </div>
+            </div>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="pending" onclick="switchTab('pending')">Post Requests</button>
+                <button class="tab-btn" data-tab="approved" onclick="switchTab('approved')">Approved Posts</button>
+                <button class="tab-btn" data-tab="rejected" onclick="switchTab('rejected')">Rejected Posts</button>
+                <button class="tab-btn" data-tab="comments" onclick="switchTab('comments')">Comments</button>
+                <button class="tab-btn" data-tab="orgrequests" onclick="switchTab('orgrequests')">Org Requests</button>
+                <button class="tab-btn" data-tab="userrequests" onclick="switchTab('userrequests')">User
+                    Requests</button>
+                <button class="tab-btn" data-tab="resources" onclick="switchTab('resources')">Resources</button>
+                <button class="tab-btn" data-tab="settings" onclick="switchTab('settings')">Settings</button>
+            </div>
+            <div id="tabContent"></div>
+        </div>
+    </div>
+
+    <div id="modalContainer"></div>
+    <div id="toast" class="toast" style="display:none"></div>
+
+    <script>
+        const API = 'http://localhost:4000/api';
+        let token = localStorage.getItem('admin_token') || '';
+        let currentUser = null;
+        let activeTab = 'pending';
+        let pendingPosts = [], publishedPosts = [], rejectedPosts = [], allCommentPosts = [], resources = [], categories = [], subcategories = [];
+        let orgRequests = [], userRequests = [], activeOrgs = [];
+        let forumSettings = { postLimitPerUser: 0, defaultPostVisibility: 'ALL' };
+
+        // ===== AUTH =====
+        async function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const errEl = document.getElementById('loginError');
+            const btn = document.getElementById('loginBtn');
+            errEl.style.display = 'none'; btn.disabled = true; btn.textContent = 'Signing in...';
+            try {
+                const res = await fetch(`${API}/auth/login`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Login failed');
+                if (data.user.role !== 'BUSINESS_ADMIN') throw new Error('Access denied. BUSINESS_ADMIN only.');
+                token = data.token; currentUser = data.user; localStorage.setItem('admin_token', token);
+                showDashboard();
+            } catch (e) { errEl.textContent = e.message; errEl.style.display = 'block'; }
+            finally { btn.disabled = false; btn.textContent = 'Sign In'; }
+        }
+        function logout() { token = ''; currentUser = null; localStorage.removeItem('admin_token'); document.getElementById('dashboard').style.display = 'none'; document.getElementById('loginScreen').style.display = 'flex'; document.getElementById('headerUser').style.display = 'none'; }
+        async function checkAuth() {
+            if (!token) return;
+            try { const res = await fetch(`${API}/users/me`, { headers: { 'Authorization': `Bearer ${token}` } }); if (!res.ok) throw 0; const d = await res.json(); if (d.role !== 'BUSINESS_ADMIN') throw 0; currentUser = d; showDashboard(); } catch { logout(); }
+        }
+        function showDashboard() {
+            document.getElementById('loginScreen').style.display = 'none'; document.getElementById('dashboard').style.display = 'block'; document.getElementById('headerUser').style.display = 'flex';
+            document.getElementById('userName').textContent = currentUser.name; document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
+            fetchAll();
+        }
+
+        // ===== DATA =====
+        async function fetchAll() { await Promise.all([fetchPosts('PENDING_APPROVAL'), fetchPosts('PUBLISHED'), fetchPosts('REJECTED'), fetchResources(), fetchCategories(), fetchSettings(), fetchOrgRequests(), fetchUserRequests()]); }
+        async function fetchPosts(status) {
+            try {
+                const res = await fetch(`${API}/admin/posts?status=${status}&take=100`, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.ok) {
+                    const d = await res.json();
+                    if (status === 'PENDING_APPROVAL') { pendingPosts = d.posts; document.getElementById('sPend').textContent = d.total; }
+                    else if (status === 'PUBLISHED') { publishedPosts = d.posts; document.getElementById('sPub').textContent = d.total; }
+                    else { rejectedPosts = d.posts; document.getElementById('sRej').textContent = d.total; }
+                }
+            } catch { }
+            renderActive();
+        }
+        async function fetchResources() {
+            try { const res = await fetch(`${API}/resources`, { headers: { 'Authorization': `Bearer ${token}` } }); if (res.ok) { resources = await res.json(); document.getElementById('sRes').textContent = resources.length; } } catch { }
+            if (activeTab === 'resources') renderResources();
+        }
+        async function fetchCategories() {
+            try { const res = await fetch(`${API}/resources/categories`, { headers: { 'Authorization': `Bearer ${token}` } }); if (res.ok) { const cats = await res.json(); categories = cats; subcategories = cats.flatMap(c => c.subcategories || []); } } catch { }
+        }
+        async function fetchSettings() {
+            try { const res = await fetch(`${API}/admin/settings`, { headers: { 'Authorization': `Bearer ${token}` } }); if (res.ok) forumSettings = await res.json(); } catch { }
+            if (activeTab === 'settings') renderSettings();
+        }
+        async function fetchOrgRequests() {
+            try {
+                const res = await fetch(`${API}/admin/org-requests`, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.ok) orgRequests = await res.json();
+            } catch { }
+            if (activeTab === 'orgrequests') renderOrgRequests();
+        }
+        async function fetchActiveOrgs() {
+            try {
+                // If there's an endpoint to get active organizations, use it. Otherwise, assume we have a way.
+                // Assuming organizations exist and are available, but auth might only return them for BUSINESS_ADMIN if configured.
+                // In actual deployment, a dedicated `GET /admin/organizations` would provide this.
+                const res = await fetch(`${API}/auth/organizations`);
+                if (res.ok) activeOrgs = await res.json();
+            } catch { }
+        }
+        async function fetchUserRequests() {
+            await fetchActiveOrgs(); // Pre-fetch orgs for mapping
+            try {
+                const res = await fetch(`${API}/admin/user-requests`, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.ok) userRequests = await res.json();
+            } catch { }
+            if (activeTab === 'userrequests') renderUserRequests();
+        }
+
+        function renderActive() {
+            if (activeTab === 'pending') renderPosts(pendingPosts, 'Pending Post Requests', 'pending');
+            else if (activeTab === 'approved') renderPosts(publishedPosts, 'Approved Posts', 'approved');
+            else if (activeTab === 'rejected') renderPosts(rejectedPosts, 'Rejected Posts', 'rejected');
+            else if (activeTab === 'comments') renderComments();
+            else if (activeTab === 'settings') renderSettings();
+            else if (activeTab === 'resources') renderResources();
+            else if (activeTab === 'orgrequests') renderOrgRequests();
+            else if (activeTab === 'userrequests') renderUserRequests();
+        }
+        function switchTab(t) { activeTab = t; document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === t)); renderActive(); }
+
+        // ===== POST RENDERING =====
+        function renderPosts(posts, title, type) {
+            if (posts.length === 0) {
+                document.getElementById('tabContent').innerHTML = `<div class="card"><div class="card-hdr"><h2>${title}</h2><button class="ref-btn" onclick="fetchPosts('${type === 'pending' ? 'PENDING_APPROVAL' : type === 'approved' ? 'PUBLISHED' : 'REJECTED'}')">↻ Refresh</button></div><div class="empty">No ${title.toLowerCase()}</div></div>`;
+                return;
+            }
+            const statusMap = { PENDING_APPROVAL: 'PENDING_APPROVAL', PUBLISHED: 'PUBLISHED', REJECTED: 'REJECTED' };
+            let rows = posts.map(p => {
+                let badge = p.status === 'PUBLISHED' ? '<span class="badge badge-pub">PUBLISHED</span>' : p.status === 'REJECTED' ? '<span class="badge badge-rej">REJECTED</span>' : '<span class="badge badge-pend">PENDING</span>';
+                let actions = '';
+                if (type === 'pending') {
+                    actions = `<div style="display:flex;gap:4px;flex-wrap:wrap">
+                <button class="btn-s btn-a" onclick="approvePost('${p.id}')">Approve</button>
+                <button class="btn-s btn-r" onclick="rejectPostPrompt('${p.id}')">Reject</button>
+                <button class="btn-s btn-e" onclick="editPostModal('${p.id}')">Edit</button>
+                <button class="btn-s btn-d" onclick="deletePost('${p.id}')">Delete</button>
+            </div>`;
+                } else if (type === 'approved') {
+                    actions = `<div style="display:flex;gap:4px"><button class="btn-s btn-e" onclick="editPostModal('${p.id}')">Edit</button><button class="btn-s btn-d" onclick="deletePost('${p.id}')">Delete</button></div>`;
+                } else {
+                    actions = `<button class="btn-s btn-d" onclick="deletePost('${p.id}')">Delete</button>`;
+                }
+                return `<tr>
+            <td><strong>${esc(p.title)}</strong></td>
+            <td>${esc(p.author?.name || 'Unknown')}</td>
+            <td>${esc(p.category?.name || '-')}</td>
+            <td>${badge}</td>
+            <td>${p._count ? p._count.comments : 0}</td>
+            <td>${new Date(p.createdAt).toLocaleDateString()}</td>
+            <td>${actions}</td>
+        </tr>`;
+            }).join('');
+            document.getElementById('tabContent').innerHTML = `<div class="card"><div class="card-hdr"><h2>${title}</h2><button class="ref-btn" onclick="fetchPosts('${type === 'pending' ? 'PENDING_APPROVAL' : type === 'approved' ? 'PUBLISHED' : 'REJECTED'}')">↻ Refresh</button></div>
+        <table><thead><tr><th>Title</th><th>Author</th><th>Category</th><th>Status</th><th>Comments</th><th>Date</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+        }
+
+        // ===== POST ACTIONS =====
+        async function approvePost(id) {
+            try {
+                const res = await fetch(`${API}/admin/posts/${id}/approve`, { method: 'PUT', headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.ok) { toast('Post approved & published', 's'); fetchPosts('PENDING_APPROVAL'); fetchPosts('PUBLISHED'); } else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+        function rejectPostPrompt(id) {
+            document.getElementById('modalContainer').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+        <h2>Reject Post</h2><div class="fg"><label>Reason</label><input id="rjReason" placeholder="Enter rejection reason"/></div>
+        <div class="modal-actions"><button onclick="closeModal()" style="background:#f3f4f6;color:#374151">Cancel</button><button onclick="rejectPost('${id}')" style="background:#dc2626;color:#fff">Reject</button></div>
+    </div></div>`;
+        }
+        async function rejectPost(id) {
+            const reason = document.getElementById('rjReason').value;
+            try {
+                const res = await fetch(`${API}/admin/posts/${id}/reject`, { method: 'PUT', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ reason }) });
+                if (res.ok) { toast('Post rejected', 's'); closeModal(); fetchPosts('PENDING_APPROVAL'); fetchPosts('REJECTED'); } else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+        function editPostModal(id) {
+            const allP = [...pendingPosts, ...publishedPosts, ...rejectedPosts];
+            const p = allP.find(x => x.id === id); if (!p) return;
+            document.getElementById('modalContainer').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+        <h2>Edit Post</h2>
+        <div class="fg"><label>Title</label><input id="epTitle" value="${esc(p.title)}"/></div>
+        <div class="fg"><label>Content</label><textarea id="epContent">${esc(p.content)}</textarea></div>
+        <div class="fg"><label>Tags (comma separated)</label><input id="epTags" value="${(p.tags || []).join(', ')}"/></div>
+        <div class="modal-actions"><button onclick="closeModal()" style="background:#f3f4f6;color:#374151">Cancel</button><button onclick="savePost('${id}')" style="background:#818cf8;color:#1e1b4b">Save</button></div>
+    </div></div>`;
+        }
+        async function savePost(id) {
+            const title = document.getElementById('epTitle').value;
+            const content = document.getElementById('epContent').value;
+            const tags = document.getElementById('epTags').value.split(',').map(t => t.trim()).filter(Boolean);
+            try {
+                const res = await fetch(`${API}/admin/posts/${id}`, { method: 'PUT', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ title, content, tags }) });
+                if (res.ok) { toast('Post updated', 's'); closeModal(); fetchAll(); } else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+        async function deletePost(id) {
+            if (!confirm('Delete this post permanently? This also removes all related comments, likes, and saved entries.')) return;
+            try {
+                const res = await fetch(`${API}/admin/posts/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.ok) { toast('Post deleted', 's'); fetchAll(); } else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+
+        // ===== COMMENTS =====
+        function renderComments() {
+            const allP = [...publishedPosts, ...pendingPosts, ...rejectedPosts];
+            if (allP.length === 0) {
+                document.getElementById('tabContent').innerHTML = `<div class="card"><div class="card-hdr"><h2>Comments Management</h2></div><div class="empty">No posts available</div></div>`;
+                return;
+            }
+            let options = allP.map(p => `<option value="${p.id}">${esc(p.title)} (${p._count?.comments || 0} comments)</option>`).join('');
+            document.getElementById('tabContent').innerHTML = `<div class="card"><div class="card-hdr"><h2>Comments Management</h2></div>
+        <div style="padding:16px 18px"><div class="fg"><label>Select Post</label><select id="commentPostSelect" onchange="loadComments(this.value)"><option value="">-- Select a post --</option>${options}</select></div>
+        <div id="commentsListArea"></div></div></div>`;
+        }
+        async function loadComments(postId) {
+            if (!postId) { document.getElementById('commentsListArea').innerHTML = ''; return; }
+            try {
+                const res = await fetch(`${API}/admin/posts/${postId}/comments`, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.ok) {
+                    const comments = await res.json();
+                    if (comments.length === 0) { document.getElementById('commentsListArea').innerHTML = '<div class="empty">No comments on this post</div>'; return; }
+                    let rows = comments.map(c => `<tr>
+                <td>${esc(c.author?.name || 'Unknown')}</td>
+                <td style="max-width:300px;word-break:break-word">${esc(c.content)}</td>
+                <td>${c.parentComment ? '↳ Reply to ' + esc(c.parentComment.author?.name || '?') : 'Top-level'}</td>
+                <td>${new Date(c.createdAt).toLocaleDateString()}</td>
+                <td><div style="display:flex;gap:4px"><button class="btn-s btn-e" onclick="editCommentModal('${c.id}',${JSON.stringify(esc(c.content)).replace(/'/g, "\\'")},'${postId}')">Edit</button><button class="btn-s btn-d" onclick="deleteComment('${c.id}','${postId}')">Delete</button></div></td>
+            </tr>`).join('');
+                    document.getElementById('commentsListArea').innerHTML = `<table><thead><tr><th>Author</th><th>Content</th><th>Type</th><th>Date</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table>`;
+                }
+            } catch { toast('Failed to load comments', 'e'); }
+        }
+        function editCommentModal(id, content, postId) {
+            document.getElementById('modalContainer').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+        <h2>Edit Comment</h2>
+        <div class="fg"><label>Content</label><textarea id="ecContent">${content}</textarea></div>
+        <div class="modal-actions"><button onclick="closeModal()" style="background:#f3f4f6;color:#374151">Cancel</button><button onclick="saveComment('${id}','${postId}')" style="background:#818cf8;color:#1e1b4b">Save</button></div>
+    </div></div>`;
+        }
+        async function saveComment(id, postId) {
+            const content = document.getElementById('ecContent').value;
+            try {
+                const res = await fetch(`${API}/admin/comments/${id}`, { method: 'PUT', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ content }) });
+                if (res.ok) { toast('Comment updated', 's'); closeModal(); loadComments(postId); } else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+        async function deleteComment(id, postId) {
+            if (!confirm('Delete this comment and its replies?')) return;
+            try {
+                const res = await fetch(`${API}/admin/comments/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.ok) { toast('Comment deleted', 's'); loadComments(postId); } else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+
+        // ===== ORG REQUESTS =====
+        function renderOrgRequests() {
+            if (orgRequests.length === 0) {
+                document.getElementById('tabContent').innerHTML = `<div class="card"><div class="card-hdr"><h2>Organization Requests</h2><button class="ref-btn" onclick="fetchOrgRequests()">↻ Refresh</button></div><div class="empty">No pending organization requests</div></div>`;
+                return;
+            }
+            let rows = orgRequests.map(r => `<tr>
+                <td><strong>${esc(r.soldToCompany)}</strong></td>
+                <td>${esc(r.authorityAdminName)}<br><small style="color:#6b7280">${esc(r.authorityAdminEmail)}</small></td>
+                <td>${esc(r.companyCity)}, ${esc(r.companyCountry || '')}</td>
+                <td><span class="badge ${r.status === 'PENDING' ? 'badge-pend' : (r.status === 'ACTIVE' ? 'badge-pub' : 'badge-rej')}">${r.status}</span></td>
+                <td>${new Date(r.createdAt).toLocaleDateString()}</td>
+                <td><div style="display:flex;gap:4px">
+                    <button class="btn-s btn-r" style="background:#3b82f6" onclick="viewOrgDetailsModal('${r.id}')">View</button>
+                    ${r.status === 'PENDING' ? `
+                    <button class="btn-s btn-a" onclick="approveOrgModal('${r.id}')">Approve</button>
+                    <button class="btn-s btn-r" onclick="rejectOrgModal('${r.id}')">Reject</button>
+                    ` : ''}
+                </div></td>
+            </tr>`).join('');
+            document.getElementById('tabContent').innerHTML = `<div class="card"><div class="card-hdr"><h2>Organization Requests</h2><button class="ref-btn" onclick="fetchOrgRequests()">↻ Refresh</button></div>
+            <table><thead><tr><th>Company</th><th>Admin Contact</th><th>Location</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+        }
+
+        function viewOrgDetailsModal(id) {
+            const org = orgRequests.find(o => o.id === id); if (!org) return;
+            document.getElementById('modalContainer').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal" style="max-width:600px;max-height:80vh;overflow-y:auto;">
+                <h2>Organization Request Details</h2>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+                    <div>
+                        <h4 style="margin:0 0 8px 0;border-bottom:1px solid #e5e7eb;padding-bottom:4px">Sold To</h4>
+                        <div style="font-size:13px">
+                            <strong>${esc(org.soldToCompany)}</strong><br>
+                            ${esc(org.soldToAddress)}<br>
+                            ${esc(org.soldToCity)}, ${esc(org.soldToState)} ${esc(org.soldToPostalCode)}<br>
+                            ${esc(org.soldToCountry)}<br>
+                            Email: ${esc(org.soldToEmail || 'N/A')}<br>
+                            Phone: ${esc(org.soldToPhone)}<br>
+                            Sales Tax Exempt: <strong>${org.soldToSalesTaxExempt ? 'Yes' : 'No'}</strong>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="margin:0 0 8px 0;border-bottom:1px solid #e5e7eb;padding-bottom:4px">Bill To</h4>
+                        <div style="font-size:13px">
+                            <strong>${esc(org.billToCompany)}</strong><br>
+                            ${esc(org.billToAddress)}<br>
+                            ${esc(org.billToCity)}, ${esc(org.billToState)} ${esc(org.billToPostalCode)}<br>
+                            ${esc(org.billToCountry)}<br>
+                            Email: ${esc(org.billToEmail || 'N/A')}<br>
+                            Phone: ${esc(org.billToPhone)}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="margin:0 0 8px 0;border-bottom:1px solid #e5e7eb;padding-bottom:4px">Ship To</h4>
+                        <div style="font-size:13px">
+                            <strong>${esc(org.shipToCompany)}</strong><br>
+                            ${esc(org.shipToAddress)}<br>
+                            ${esc(org.shipToCity)}, ${esc(org.shipToState)} ${esc(org.shipToPostalCode)}<br>
+                            ${esc(org.shipToCountry)}<br>
+                            Email: ${esc(org.shipToEmail || 'N/A')}<br>
+                            Phone: ${esc(org.shipToPhone)}
+                        </div>
+                    </div>
+                    <div>
+                        <h4 style="margin:0 0 8px 0;border-bottom:1px solid #e5e7eb;padding-bottom:4px">Business Info</h4>
+                        <div style="font-size:13px">
+                            Carrier: ${esc(org.carrier)}<br>
+                            Acct #: ${esc(org.carrierAccountNumber || 'N/A')}
+                        </div>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <h4 style="margin:0 0 8px 0;border-bottom:1px solid #e5e7eb;padding-bottom:4px">Authority Admin Contact</h4>
+                        <div style="font-size:13px">
+                            Name: ${esc(org.authorityAdminName)} (${esc(org.authorityAdminPosition || 'N/A')})<br>
+                            Email: ${esc(org.authorityAdminEmail)}<br>
+                            Phone: ${esc(org.authorityAdminPhone)}<br>
+                            Fax: ${esc(org.authorityAdminFax || 'N/A')}<br>
+                            ${org.rejectionReason ? `<br><strong style="color:#dc2626">Rejection Reason:</strong> ${esc(org.rejectionReason)}` : ''}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-actions"><button onclick="closeModal()" style="background:#f3f4f6;color:#374151">Close</button></div>
+            </div></div>`;
+        }
+
+        function approveOrgModal(id) {
+            const org = orgRequests.find(o => o.id === id); if (!org) return;
+            document.getElementById('modalContainer').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+                <h2>Approve Organization: ${esc(org.soldToCompany)}</h2>
+                <div class="fg"><label>SAP BP ID (Required for Approval)</label><input id="aoSap" placeholder="e.g. 10002934"/></div>
+                <div class="fg"><label>Currency</label><select id="aoCur"><option value="USD">USD</option><option value="EUR">EUR</option></select></div>
+                <div class="fg"><label>Account Status</label><select id="aoStatus"><option value="ACTIVE">Active</option><option value="INACTIVE">Inactive</option></select></div>
+                <div class="modal-actions"><button onclick="closeModal()" style="background:#f3f4f6;color:#374151">Cancel</button><button onclick="approveOrg('${id}')" style="background:#818cf8;color:#1e1b4b">Approve & Send Email</button></div>
+            </div></div>`;
+        }
+
+        async function approveOrg(id) {
+            const sapBpId = document.getElementById('aoSap').value.trim();
+            const currency = document.getElementById('aoCur').value;
+            const orgStatus = document.getElementById('aoStatus').value;
+            if (!sapBpId) return toast('SAP BP ID is required', 'e');
+            try {
+                const res = await fetch(`${API}/admin/org-requests/${id}/approve`, {
+                    method: 'POST', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sapBpId, currency, orgStatus })
+                });
+                if (res.ok) {
+                    toast('Organization approved. Email triggered.', 's');
+                    closeModal();
+                    fetchOrgRequests();
+                    fetchActiveOrgs();
+                }
+                else { const err = await res.json(); toast(err.error || err.details || 'Failed', 'e'); }
+            } catch { toast('Error', 'e'); }
+        }
+
+        function rejectOrgModal(id) {
+            document.getElementById('modalContainer').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+                <h2>Reject Organization Request</h2>
+                <div class="fg"><label>Rejection Reason</label><input id="roReason" placeholder="Enter reason to include in email"/></div>
+                <div class="modal-actions"><button onclick="closeModal()" style="background:#f3f4f6;color:#374151">Cancel</button><button onclick="rejectOrg('${id}')" style="background:#dc2626;color:#fff">Reject & Send Email</button></div>
+            </div></div>`;
+        }
+
+        async function rejectOrg(id) {
+            const reason = document.getElementById('roReason').value;
+            try {
+                const res = await fetch(`${API}/admin/org-requests/${id}/reject`, {
+                    method: 'POST', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ reason })
+                });
+                if (res.ok) { toast('Request rejected. Email triggered.', 's'); closeModal(); fetchOrgRequests(); }
+                else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+
+        // ===== USER REQUESTS =====
+        function renderUserRequests() {
+            if (userRequests.length === 0) {
+                document.getElementById('tabContent').innerHTML = `<div class="card"><div class="card-hdr"><h2>User Requests</h2><button class="ref-btn" onclick="fetchUserRequests()">↻ Refresh</button></div><div class="empty">No pending user requests</div></div>`;
+                return;
+            }
+            let rows = userRequests.map(r => `<tr>
+                <td><strong>${esc(r.name)}</strong><br><small style="color:#6b7280">${esc(r.email)}</small></td>
+                <td>${esc(r.company || '-')}</td>
+                <td>${esc(r.businessUnit || '-')}</td>
+                <td><span class="badge ${r.status === 'PENDING' ? 'badge-pend' : (r.status === 'ACTIVE' ? 'badge-pub' : 'badge-rej')}">${r.status}</span></td>
+                <td>${new Date(r.createdAt).toLocaleDateString()}</td>
+                <td><div style="display:flex;gap:4px">
+                    <button class="btn-s btn-a" onclick="approveUserModal('${r.id}')">Review & Approve</button>
+                    <button class="btn-s btn-r" onclick="rejectUserModal('${r.id}')">Reject</button>
+                </div></td>
+            </tr>`).join('');
+            document.getElementById('tabContent').innerHTML = `<div class="card"><div class="card-hdr"><h2>User Requests</h2><button class="ref-btn" onclick="fetchUserRequests()">↻ Refresh</button></div>
+            <table><thead><tr><th>User</th><th>Requested Org</th><th>Business Unit</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+        }
+
+        function approveUserModal(id) {
+            const u = userRequests.find(x => x.id === id); if (!u) return;
+            // Best guess for what org they asked for
+            let guessedOrg = activeOrgs.find(o => o.name.toLowerCase() === (u.company || '').toLowerCase());
+            let orgOpts = activeOrgs.map(o => `<option value="${o.id}" ${guessedOrg && guessedOrg.id === o.id ? 'selected' : ''}>${esc(o.name)}</option>`).join('');
+
+            document.getElementById('modalContainer').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+                <h2>Approve User: ${esc(u.name)}</h2>
+                <div style="font-size:11px;color:#6b7280;margin-bottom:12px">Requested Org: <strong>${esc(u.company || 'None')}</strong></div>
+                <div class="fg"><label>Assign to Organization (Required)</label><select id="auOrg"><option value="">-- Select Organization --</option>${orgOpts}</select></div>
+                <div class="fg"><label>Assign Role</label><select id="auRole">
+                    <option value="VIEWER">VIEWER (Read-only)</option>
+                    <option value="PUBLISHER">PUBLISHER (Can post)</option>
+                    <option value="ORG_ADMIN">ORG_ADMIN (Manage org)</option>
+                    <option value="BUSINESS_ADMIN">BUSINESS_ADMIN (Full control)</option>
+                </select></div>
+                <div class="modal-actions"><button onclick="closeModal()" style="background:#f3f4f6;color:#374151">Cancel</button><button onclick="approveUser('${id}')" style="background:#818cf8;color:#1e1b4b">Approve & Send Email</button></div>
+            </div></div>`;
+        }
+
+        async function approveUser(id) {
+            const orgId = document.getElementById('auOrg').value;
+            const role = document.getElementById('auRole').value;
+            if (!orgId) return toast('User must be assigned to an Organization', 'e');
+            try {
+                const res = await fetch(`${API}/admin/user-requests/${id}/approve`, {
+                    method: 'POST', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ orgId, role })
+                });
+                if (res.ok) { toast('User approved. Welcome email triggered.', 's'); closeModal(); fetchUserRequests(); }
+                else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+
+        function rejectUserModal(id) {
+            document.getElementById('modalContainer').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+                <h2>Reject User Request</h2>
+                <div class="fg"><label>Rejection Reason</label><input id="ruReason" placeholder="Enter reason to include in email"/></div>
+                <div class="modal-actions"><button onclick="closeModal()" style="background:#f3f4f6;color:#374151">Cancel</button><button onclick="rejectUser('${id}')" style="background:#dc2626;color:#fff">Reject & Send Email</button></div>
+            </div></div>`;
+        }
+
+        async function rejectUser(id) {
+            const reason = document.getElementById('ruReason').value;
+            try {
+                const res = await fetch(`${API}/admin/user-requests/${id}/reject`, {
+                    method: 'POST', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ reason })
+                });
+                if (res.ok) { toast('User rejected. Email triggered.', 's'); closeModal(); fetchUserRequests(); }
+                else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+
+        // ===== SETTINGS =====
+        function renderSettings() {
+            document.getElementById('tabContent').innerHTML = `<div class="card"><div class="card-hdr"><h2>Forum Settings</h2></div>
+        <div class="settings-grid">
+            <div class="scard"><h3>Post Limit Per User</h3><p>Set a maximum number of posts a user can submit. Set to 0 for unlimited.</p>
+                <input type="number" id="setLimit" min="0" value="${forumSettings.postLimitPerUser}"/></div>
+            <div class="scard"><h3>Default Post Visibility</h3><p>Whether new posts are visible to all users or restricted to the author's organization.</p>
+                <select id="setVisibility"><option value="ALL" ${forumSettings.defaultPostVisibility === 'ALL' ? 'selected' : ''}>All Users</option><option value="ORG_ONLY" ${forumSettings.defaultPostVisibility === 'ORG_ONLY' ? 'selected' : ''}>Organization Only</option></select></div>
+        </div>
+        <div class="save-bar"><button class="btn-p" style="width:auto;padding:9px 28px" onclick="saveSettings()">Save Settings</button></div>
+    </div>`;
+        }
+        async function saveSettings() {
+            const postLimitPerUser = parseInt(document.getElementById('setLimit').value) || 0;
+            const defaultPostVisibility = document.getElementById('setVisibility').value;
+            try {
+                const res = await fetch(`${API}/admin/settings`, { method: 'PUT', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ postLimitPerUser, defaultPostVisibility }) });
+                if (res.ok) { forumSettings = await res.json(); toast('Settings saved', 's'); } else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+
+        // ===== RESOURCES =====
+        function renderResources() {
+            let rows = '';
+            if (resources.length > 0) {
+                rows = resources.map(r => `<tr>
+            <td><strong>${esc(r.title)}</strong></td>
+            <td style="max-width:200px;word-break:break-word">${esc(r.description || '-')}</td>
+            <td>${r.categories && r.categories.length > 0 ? r.categories.map(c => esc(c.name)).join(', ') : '-'}</td>
+            <td>${r.subcategories && r.subcategories.length > 0 ? r.subcategories.map(s => esc(s.name)).join(', ') : '-'}</td>
+            <td>${r.downloadCount || 0}</td>
+            <td><div style="display:flex;gap:4px">
+                <button class="btn-s btn-a" onclick="window.open('${r.fileUrl}', '_blank')">Preview</button>
+                <button class="btn-s btn-e" onclick="editResourceModal('${r.id}')">Edit</button>
+                <button class="btn-s btn-d" onclick="deleteResource('${r.id}')">Delete</button>
+            </div></td>
+        </tr>`).join('');
+            }
+            document.getElementById('tabContent').innerHTML = `<div class="card"><div class="card-hdr"><h2>Resources</h2><div style="display:flex;gap:6px"><button class="ref-btn" onclick="fetchResources()">↻ Refresh</button><button class="btn-s btn-a" onclick="addResourceModal()">+ Add Resource</button></div></div>
+        ${resources.length === 0 ? '<div class="empty">No resources uploaded</div>' :
+                    `<table><thead><tr><th>Title</th><th>Description</th><th>Category</th><th>Subcategory</th><th>Downloads</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table>`}
+    </div>`;
+        }
+        function addResourceModal() {
+            let catOpts = categories.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('');
+            document.getElementById('modalContainer').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+        <h2>Add Resource</h2>
+        <div class="fg"><label>Title *</label><input id="arTitle"/></div>
+        <div class="fg"><label>Description</label><textarea id="arDesc"></textarea></div>
+        <div class="fg"><label>Resource File *</label><input type="file" id="arFile" accept="*/*"/></div>
+        <div class="fg"><label>Categories (Hold Ctrl/Cmd to select multiple) *</label><select id="arCat" multiple size="4" onchange="updateSubcats('arCat','arSub')">${catOpts}</select></div>
+        <div class="fg"><label>Subcategories (Hold Ctrl/Cmd to select multiple)</label><select id="arSub" multiple size="4"></select></div>
+        <div class="modal-actions"><button onclick="closeModal()" style="background:#f3f4f6;color:#374151">Cancel</button><button onclick="createResource()" style="background:#818cf8;color:#1e1b4b">Create</button></div>
+    </div></div>`;
+        }
+        function updateSubcats(catSelectId, subSelectId) {
+            const catSelect = document.getElementById(catSelectId);
+            const selectedCatIds = Array.from(catSelect.selectedOptions).map(o => o.value);
+
+            let subs = [];
+            selectedCatIds.forEach(id => {
+                const cat = categories.find(c => c.id === id);
+                if (cat && cat.subcategories) subs = subs.concat(cat.subcategories);
+            });
+
+            document.getElementById(subSelectId).innerHTML = subs.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join('');
+        }
+        async function createResource() {
+            const title = document.getElementById('arTitle').value;
+            const description = document.getElementById('arDesc').value;
+            const fileInput = document.getElementById('arFile');
+
+            const catSelect = document.getElementById('arCat');
+            const categoryIds = Array.from(catSelect.selectedOptions).map(o => o.value);
+
+            const subSelect = document.getElementById('arSub');
+            const subcategoryIds = Array.from(subSelect.selectedOptions).map(o => o.value);
+
+            if (!title || !fileInput.files[0] || categoryIds.length === 0) {
+                toast('Title, File, and at least one category required', 'e');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('description', description);
+            formData.append('file', fileInput.files[0]);
+            formData.append('categoryIds', JSON.stringify(categoryIds));
+            formData.append('subcategoryIds', JSON.stringify(subcategoryIds));
+
+            try {
+                const res = await fetch(`${API}/admin/resources`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }, // Do NOT set Content-Type for FormData, browser sets multipart/form-data boundary
+                    body: formData
+                });
+                if (res.ok) { toast('Resource created', 's'); closeModal(); fetchResources(); }
+                else { const d = await res.json(); toast(d.error || 'Failed', 'e'); }
+            } catch { toast('Error saving resource', 'e'); }
+        }
+        function editResourceModal(id) {
+            const r = resources.find(x => x.id === id); if (!r) return;
+            const myCatIds = (r.categories || []).map(c => c.id);
+            const mySubIds = (r.subcategories || []).map(s => s.id);
+
+            let catOpts = categories.map(c => `<option value="${c.id}" ${myCatIds.includes(c.id) ? 'selected' : ''}>${esc(c.name)}</option>`).join('');
+            document.getElementById('modalContainer').innerHTML = `<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+        <h2>Edit Resource</h2>
+        <div class="fg"><label>Title</label><input id="erTitle" value="${esc(r.title)}"/></div>
+        <div class="fg"><label>Description</label><textarea id="erDesc">${esc(r.description || '')}</textarea></div>
+        <div class="fg"><label>Current File</label>
+            <div style="font-size:11px;margin-bottom:4px;word-break:break-all"><a href="${r.fileUrl}" target="_blank">${r.fileUrl}</a></div>
+            <label>Upload New File (to replace)</label><input type="file" id="erFile" accept="*/*"/>
+        </div>
+        <div class="fg"><label>Categories (Hold Ctrl/Cmd to select multiple)</label><select id="erCat" multiple size="4" onchange="updateSubcats('erCat','erSub')">${catOpts}</select></div>
+        <div class="fg"><label>Subcategories (Hold Ctrl/Cmd to select multiple)</label><select id="erSub" multiple size="4"></select></div>
+        <div class="modal-actions"><button onclick="closeModal()" style="background:#f3f4f6;color:#374151">Cancel</button><button onclick="saveResource('${id}')" style="background:#818cf8;color:#1e1b4b">Save</button></div>
+    </div></div>`;
+
+            setTimeout(() => {
+                updateSubcats('erCat', 'erSub');
+                const subSelect = document.getElementById('erSub');
+                Array.from(subSelect.options).forEach(opt => {
+                    if (mySubIds.includes(opt.value)) opt.selected = true;
+                });
+            }, 50);
+        }
+        async function saveResource(id) {
+            const title = document.getElementById('erTitle').value;
+            const description = document.getElementById('erDesc').value;
+            const fileInput = document.getElementById('erFile');
+
+            const catSelect = document.getElementById('erCat');
+            const categoryIds = Array.from(catSelect.selectedOptions).map(o => o.value);
+
+            const subSelect = document.getElementById('erSub');
+            const subcategoryIds = Array.from(subSelect.selectedOptions).map(o => o.value);
+
+            const formData = new FormData();
+            if (title) formData.append('title', title);
+            if (description !== undefined) formData.append('description', description);
+            if (fileInput.files[0]) formData.append('file', fileInput.files[0]);
+            formData.append('categoryIds', JSON.stringify(categoryIds));
+            formData.append('subcategoryIds', JSON.stringify(subcategoryIds));
+
+            try {
+                const res = await fetch(`${API}/admin/resources/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+                if (res.ok) { toast('Resource updated', 's'); closeModal(); fetchResources(); }
+                else toast('Failed', 'e');
+            } catch { toast('Error details', 'e'); }
+        }
+        async function deleteResource(id) {
+            if (!confirm('Delete this resource?')) return;
+            try {
+                const res = await fetch(`${API}/admin/resources/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
+                if (res.ok) { toast('Resource deleted', 's'); fetchResources(); } else toast('Failed', 'e');
+            } catch { toast('Error', 'e'); }
+        }
+
+        // ===== UTILS =====
+        function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+        function closeModal() { document.getElementById('modalContainer').innerHTML = ''; }
+        function toast(msg, type) { const el = document.getElementById('toast'); el.textContent = msg; el.className = `toast toast-${type}`; el.style.display = 'block'; setTimeout(() => el.style.display = 'none', 3500); }
+        document.getElementById('loginPassword').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+        checkAuth();
+    </script>
+</body>
+
+</html>

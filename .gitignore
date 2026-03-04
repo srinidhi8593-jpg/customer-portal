@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+
+# Build output
+cmfe/.next/
+cmfe/out/
+cmbe/dist/
+
+# Environment files (contain secrets)
+.env
+.env.local
+.env.production
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Uploads (user-uploaded files)
+cmbe/uploads/
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Firebase
+.firebase/
+firebase-debug.log
+
+# Misc
+*.tsbuildinfo

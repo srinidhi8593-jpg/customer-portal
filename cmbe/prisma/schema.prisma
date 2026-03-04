@@ -1,0 +1,315 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  BUSINESS_ADMIN
+  ORG_ADMIN
+  PUBLISHER
+  VIEWER
+}
+
+enum Status {
+  PENDING
+  ACTIVE
+  INACTIVE
+  REJECTED
+}
+
+enum PostStatus {
+  PENDING_APPROVAL
+  PUBLISHED
+  REJECTED
+}
+
+enum Target {
+  ALL
+  ORG
+  ROLE
+}
+
+model UserRegistrationRequest {
+  id              String   @id @default(uuid())
+  company         String
+  industry        String?
+  simulator       String?
+  firstName       String
+  lastName        String
+  name            String
+  title           String?
+  email           String
+  phone           String?
+  phoneCountry    String?
+  location        String?
+  rejectionReason String?
+  status          Status   @default(PENDING)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model OrgRegistrationRequest {
+  id                    String   @id @default(uuid())
+  // Sold To
+  soldToCompany         String
+  soldToAddress         String
+  soldToCity            String
+  soldToState           String
+  soldToPostalCode      String
+  soldToCountry         String
+  soldToPhone           String
+  soldToEmail           String?
+  soldToSalesTaxExempt  Boolean @default(false)
+  // Bill To
+  billToCompany         String
+  billToAddress         String
+  billToCity            String
+  billToState           String
+  billToPostalCode      String
+  billToCountry         String
+  billToPhone           String
+  billToEmail           String?
+  // Ship To
+  shipToCompany         String
+  shipToAddress         String
+  shipToCity            String
+  shipToState           String
+  shipToPostalCode      String
+  shipToCountry         String
+  shipToPhone           String
+  shipToEmail           String?
+  // Carrier
+  carrier               String
+  carrierAccountNumber  String?
+  // Authority Admin Contact
+  authorityAdminName    String
+  authorityAdminPhone   String
+  authorityAdminEmail   String
+  authorityAdminPosition String?
+  authorityAdminFax     String?
+  // Rejection reason
+  rejectionReason       String?
+  status                Status   @default(PENDING)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+model Organization {
+  id        String   @id @default(uuid())
+  name      String
+  sapBpId   String?  @unique
+  currency  String?
+  status    Status   @default(PENDING)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users     User[]
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  passwordHash  String
+  name          String
+  title         String?        // Designation
+  phone         String?
+  businessUnit  String?        // Can be a string or comma-separated for multiple
+  role          Role
+  status        Status         @default(PENDING)
+  orgId         String?
+  organization  Organization?  @relation(fields: [orgId], references: [id])
+  posts         Post[]
+  comments      Comment[]
+  postVotes     PostVote[]
+  commentVotes  CommentVote[]
+  savedPosts         SavedPost[]
+  notifications      Notification[]
+  followedCategories FollowedCategory[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model ForumCategory {
+  id        String             @id @default(uuid())
+  name      String
+  posts     Post[]
+  followers FollowedCategory[]
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+}
+
+model ResourceCategory {
+  id            String                @id @default(uuid())
+  name          String
+  resources     Resource[]            @relation("ResourceCategories")
+  subcategories ResourceSubcategory[]
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+}
+
+model ResourceSubcategory {
+  id         String           @id @default(uuid())
+  name       String
+  categoryId String
+  category   ResourceCategory @relation(fields: [categoryId], references: [id])
+  resources  Resource[]       @relation("ResourceSubcategories")
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+}
+
+model Post {
+  id             String        @id @default(uuid())
+  title          String
+  content        String
+  authorId       String
+  author         User          @relation(fields: [authorId], references: [id])
+  status         PostStatus    @default(PENDING_APPROVAL)
+  categoryId     String?
+  category       ForumCategory? @relation(fields: [categoryId], references: [id])
+  isBestAnswerId String?       @unique
+  bestAnswer     Comment?      @relation("BestAnswer", fields: [isBestAnswerId], references: [id])
+  attachments    String[]
+  tags           String[]
+  comments       Comment[]     @relation("PostComments")
+  votes          PostVote[]
+  upvotes        Int           @default(0)
+  downvotes      Int           @default(0)
+  savedBy        SavedPost[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model Comment {
+  id              String    @id @default(uuid())
+  content         String
+  postId          String
+  post            Post      @relation("PostComments", fields: [postId], references: [id])
+  authorId        String
+  author          User      @relation(fields: [authorId], references: [id])
+  parentCommentId String?
+  parentComment   Comment?  @relation("ThreadedReplies", fields: [parentCommentId], references: [id])
+  replies         Comment[] @relation("ThreadedReplies")
+  votes           CommentVote[]
+  upvotes         Int       @default(0)
+  downvotes       Int       @default(0)
+  bestAnswerFor   Post?     @relation("BestAnswer")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+enum VoteType {
+  UPVOTE
+  DOWNVOTE
+}
+
+model PostVote {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  type      VoteType
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
+}
+
+model CommentVote {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  commentId String
+  comment   Comment  @relation(fields: [commentId], references: [id])
+  type      VoteType
+  createdAt DateTime @default(now())
+
+  @@unique([userId, commentId])
+}
+
+model SavedPost {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id])
+  createdAt DateTime @default(now())
+  @@unique([userId, postId])
+}
+
+model FollowedCategory {
+  id         String        @id @default(uuid())
+  userId     String
+  user       User          @relation(fields: [userId], references: [id])
+  categoryId String
+  category   ForumCategory @relation(fields: [categoryId], references: [id])
+  createdAt  DateTime      @default(now())
+
+  @@unique([userId, categoryId])
+}
+
+model Resource {
+  id            String               @id @default(uuid())
+  title         String
+  description   String
+  fileUrl       String
+  downloadCount Int                  @default(0)
+  categories    ResourceCategory[]   @relation("ResourceCategories")
+  subcategories ResourceSubcategory[] @relation("ResourceSubcategories")
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  content   String
+  isRead    Boolean  @default(false)
+  link      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Announcement {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model EmailTemplate {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  subject   String
+  bodyText  String
+  bodyHtml  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SEOSetting {
+  id              String   @id @default(uuid())
+  pageKey         String   @unique
+  metaTitle       String
+  metaDescription String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+enum PostVisibility {
+  ALL
+  ORG_ONLY
+}
+
+model ForumSettings {
+  id                    String         @id @default(uuid())
+  postLimitPerUser      Int            @default(0)
+  defaultPostVisibility PostVisibility @default(ALL)
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+}
