@@ -613,4 +613,32 @@ router.delete('/announcements/:id', authenticate, authorize(['BUSINESS_ADMIN', '
     }
 });
 
+// Seed default forum categories (idempotent — safe to call multiple times)
+router.post('/seed/forum-categories', authenticate, authorize(['BUSINESS_ADMIN']), async (req: Request, res: Response) => {
+    const DEFAULT_CATEGORIES = [
+        'General Discussion',
+        'Help & Support',
+        'Announcements',
+        'Best Practices',
+        'Product Updates',
+        'Feature Requests',
+        'Debates',
+        'News & Trends',
+    ];
+    try {
+        let added = 0;
+        for (const name of DEFAULT_CATEGORIES) {
+            const exists = await prisma.forumCategory.findFirst({ where: { name } });
+            if (!exists) {
+                await prisma.forumCategory.create({ data: { name } });
+                added++;
+            }
+        }
+        res.json({ message: `Seeded successfully. Added ${added} new categories.` });
+    } catch (err) {
+        console.error('Seed forum categories error:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 export default router;
