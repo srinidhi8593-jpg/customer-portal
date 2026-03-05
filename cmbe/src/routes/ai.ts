@@ -22,7 +22,7 @@ router.post('/chat', authenticate, async (req: Request, res: Response) => {
         const isGreeting = ['hi', 'hello', 'hey', 'greetings', 'help'].includes(lowerMsg);
 
         if (!ai && isGreeting) {
-            return res.json({ reply: "Hi there! 👋 I am currently operating in **Database-Only Mode** because my AI brain (API Key) isn't connected yet.\n\nAsk me a specific question, and I'll search our community forum to find relevant posts for you!" });
+            return res.json({ reply: "Hi there! 👋 I am currently operating in **Database-Only Mode** because my AI brain (API Key) isn't connected yet.\n\nAsk me a specific question, and I'll search our debate forum to find relevant posts for you!" });
         }
 
         // RAG Implementation: Find relevant forum posts based on the keywords in the message.
@@ -85,7 +85,7 @@ router.post('/chat', authenticate, async (req: Request, res: Response) => {
 
         let contextBlock = '';
         if (contextPosts.length > 0) {
-            contextBlock = 'Here are some relevant forum posts from the DebatHub Community knowledge base:\n\n';
+            contextBlock = 'Here are some relevant forum posts from the DebatHub Debate knowledge base:\n\n';
             contextPosts.forEach((post, index) => {
                 // strip HTML from post content for the context block
                 const plainTextContent = post.content.replace(/<[^>]*>?/gm, '');
@@ -96,9 +96,9 @@ router.post('/chat', authenticate, async (req: Request, res: Response) => {
         }
 
         const systemInstruction = `You are a helpful and polite AI assistant for DebatHub.
-You help users by answering their questions, drawing primarily from the knowledge within the community forum posts provided in the context below.
-Always try to use the provided context to answer the question. If you use information from a post, mention that you found it in the community forum.
-If the context does not contain the answer, politely inform the user that you don't have that specific information in the current community knowledge base, but help them as best as you can.
+You help users by answering their questions, drawing primarily from the knowledge within the debate forum posts provided in the context below.
+Always try to use the provided context to answer the question. If you use information from a post, mention that you found it in the debate forum.
+If the context does not contain the answer, politely inform the user that you don't have that specific information in the current debate knowledge base, but help them as best as you can.
 Do not invent information about DebatHub products that is not supported by the context.
 Return your response formatted in Markdown.
 
@@ -160,7 +160,7 @@ router.post('/suggest', authenticate, async (req: Request, res: Response) => {
         }
 
         const plainTextContent = content.replace(/<[^>]*>?/gm, '');
-        const prompt = `Please act as a helpful AI assistant for a community forum.
+        const prompt = `Please act as a helpful AI assistant for a debate forum.
 I am going to provide you with the title and content of a user's forum post.
 Your task is to comprehensively analyze the **Post Title** and provide highly relevant suggestions.
 Crucially, you must pull recent data, relevant internet links, and study materials that directly address the topic.

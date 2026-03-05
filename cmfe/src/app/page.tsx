@@ -67,7 +67,7 @@ export default function LandingPage() {
           <h1 className="animate-fade-in-up delay-100 text-5xl md:text-7xl font-black tracking-tight mb-8 leading-[1.1]">
             Powering the Future of <br className="hidden md:block" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-acron-thrust to-acron-pitch drop-shadow-sm">
-              Community Collaboration
+              Debate & Collaboration
             </span>
           </h1>
 
@@ -77,7 +77,7 @@ export default function LandingPage() {
 
           <div className="animate-fade-in-up delay-300 flex flex-col sm:flex-row justify-center items-center gap-5">
             <Link href="/auth/register" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-acron-pitch text-acron-yoke-500 font-extrabold text-lg hover:bg-white hover:-translate-y-1 transition-all duration-300 shadow-[0_0_40px_-10px_rgba(2,230,141,0.5)] hover:shadow-[0_0_60px_-10px_rgba(2,230,141,0.7)] active:scale-95">
-              Join the Community
+              Join the Debate
             </Link>
             <Link href="/auth/login" className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/10 text-white border border-white/20 font-bold text-lg hover:bg-white/20 backdrop-blur-md hover:-translate-y-1 transition-all duration-300 active:scale-95">
               Member Sign In
@@ -127,7 +127,7 @@ export default function LandingPage() {
               },
               {
                 icon: '🤝',
-                title: 'Expert Community',
+                title: 'Expert Debate',
                 desc: 'Engage in high-level technical discussions, share best practices, and solve complex challenges together.',
                 gradient: 'from-purple-400/20 to-pink-500/10'
               }

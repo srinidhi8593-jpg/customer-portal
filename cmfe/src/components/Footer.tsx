@@ -9,7 +9,7 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
                     <div>
-                        <h3 className="text-acron-pitch text-base font-black mb-5 tracking-widest uppercase">Community</h3>
+                        <h3 className="text-acron-pitch text-base font-black mb-5 tracking-widest uppercase">Debate</h3>
                         <ul className="space-y-2.5 text-sm text-gray-300 font-medium tracking-wide">
                             {['Forum', 'Resources', 'Knowledge Base', 'Events', 'Blog'].map(i => (
                                 <li key={i}><Link href="#" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">{i}</Link></li>

@@ -255,7 +255,7 @@ export default function GlobalHeader() {
                             {user ? (
                                 <div className="space-y-1">
                                     <h4 className="text-[10px] font-black uppercase tracking-widest text-white/40 mb-2 px-2">Navigation</h4>
-                                    <Link onClick={() => setMobileMenuOpen(false)} href="/forum" className="block px-4 py-3 text-white font-bold uppercase tracking-wider text-sm hover:bg-white/5 rounded-lg border border-transparent hover:border-white/10 transition-all duration-300">Community Forum</Link>
+                                    <Link onClick={() => setMobileMenuOpen(false)} href="/forum" className="block px-4 py-3 text-white font-bold uppercase tracking-wider text-sm hover:bg-white/5 rounded-lg border border-transparent hover:border-white/10 transition-all duration-300">Debate Forum</Link>
 
                                     <div className="mt-2 text-white">
                                         <div className="px-4 py-2 font-bold uppercase tracking-wider text-sm">Resources</div>
@@ -287,7 +287,7 @@ export default function GlobalHeader() {
                         {user ? (
                             <>
                                 <Link href="/forum" className="text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300 text-sm font-bold uppercase tracking-widest px-6 py-3 border-r border-white/10">
-                                    Community Forum
+                                    Debate Forum
                                 </Link>
 
                                 {/* Resources Dropdown */}

@@ -118,7 +118,7 @@ export default function ForumListingPage() {
 
             <div className="flex justify-between items-center animate-fade-in-up">
                 <div>
-                    <h1 className="text-2xl font-black text-acron-yoke-500 tracking-tight">Community Forum</h1>
+                    <h1 className="text-2xl font-black text-acron-yoke-500 tracking-tight">Debate Forum</h1>
                     <p className="text-sm text-gray-400 mt-1 font-medium">Discover discussions, share knowledge, and connect with peers</p>
                 </div>
                 <Link href="/forum/create" className="bg-acron-pitch hover:bg-acron-yoke-500 hover:text-white text-acron-yoke-500 font-bold py-2.5 px-6 rounded-xl shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 text-sm active:scale-95 flex items-center gap-2">
@@ -166,7 +166,7 @@ export default function ForumListingPage() {
                 <div className="bg-white rounded-2xl border border-gray-100 p-16 text-center animate-fade-in">
                     <div className="text-6xl mb-5 animate-float">🔍</div>
                     <p className="text-lg font-black text-acron-yoke-500 mb-2">No discussions found</p>
-                    <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">Try adjusting your filters or start a new conversation with the community.</p>
+                    <p className="text-sm text-gray-400 mb-6 max-w-md mx-auto">Try adjusting your filters or start a new conversation in the debate forum.</p>
                     <Link href="/forum/create" className="inline-flex items-center gap-2 bg-acron-pitch text-acron-yoke-500 font-bold py-2.5 px-6 rounded-xl hover:bg-acron-yoke-500 hover:text-white transition-all duration-300 text-sm active:scale-95">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />

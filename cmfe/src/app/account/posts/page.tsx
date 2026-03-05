@@ -140,7 +140,7 @@ export default function MyPostsPage() {
                         <div className="text-6xl mb-5 animate-float">{tab === 'saved' ? '🔖' : '📝'}</div>
                         <p className="text-lg font-black text-acron-yoke-500 mb-2">No {tab} posts</p>
                         <p className="text-sm text-gray-400 font-medium mb-6">
-                            {tab === 'saved' ? 'Posts you save will appear here.' : 'Start sharing your thoughts with the community.'}
+                            {tab === 'saved' ? 'Posts you save will appear here.' : 'Start sharing your thoughts in the debate forum.'}
                         </p>
                         {tab === 'submitted' && (
                             <Link href="/forum/create" className="inline-flex items-center gap-2 bg-acron-pitch text-acron-yoke-500 font-bold py-2.5 px-6 rounded-xl hover:bg-acron-yoke-500 hover:text-white transition-all duration-300 text-sm active:scale-95">

@@ -168,7 +168,7 @@ export default function DashboardPage() {
                     <div>
                         <p className="text-xs text-gray-300 font-bold uppercase tracking-widest mb-2">{today}</p>
                         <h1 className="text-3xl md:text-4xl font-black tracking-tight">Welcome back, <span className="text-white drop-shadow-md underline decoration-acron-pitch/40 underline-offset-4">{user.name.split(' ')[0]}</span></h1>
-                        <p className="text-gray-300 mt-2 font-medium text-sm">Here&apos;s what&apos;s happening in your community today.</p>
+                        <p className="text-gray-300 mt-2 font-medium text-sm">Here&apos;s what&apos;s happening in your debate hub today.</p>
                     </div>
                     <Link href="/forum/create" className="hidden md:inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-bold py-3 px-6 rounded-xl hover:bg-white/20 transition-all backdrop-blur-sm active:scale-95">
                         <span>✏️</span> New Post
@@ -180,7 +180,7 @@ export default function DashboardPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {[
                     { label: 'Create Post', desc: 'Share a topic or news', icon: '✏️', href: '/forum/create', gradient: 'from-emerald-500/10 to-teal-500/5' },
-                    { label: 'Ask a Question', desc: 'Expert community help', icon: '💬', href: '/forum/create', gradient: 'from-blue-500/10 to-indigo-500/5' },
+                    { label: 'Ask a Question', desc: 'Expert debate help', icon: '💬', href: '/forum/create', gradient: 'from-blue-500/10 to-indigo-500/5' },
                     { label: 'My Submissions', desc: 'History and stats', icon: '📊', href: '/account/posts', gradient: 'from-purple-500/10 to-pink-500/5' },
                 ].map((a, i) => (
                     <Link key={a.label} href={a.href}
@@ -219,7 +219,7 @@ export default function DashboardPage() {
                             <div className="bg-white rounded-2xl border border-gray-100 p-12 text-center animate-fade-in">
                                 <div className="text-5xl mb-4">📝</div>
                                 <p className="text-gray-500 font-bold mb-2">No posts yet</p>
-                                <p className="text-sm text-gray-400 mb-4">Be the first to share something with the community.</p>
+                                <p className="text-sm text-gray-400 mb-4">Be the first to share something with the debate forum.</p>
                                 <Link href="/forum/create" className="inline-flex items-center gap-2 text-acron-pitch font-bold text-sm hover:text-acron-thrust transition-colors">
                                     Create your first post
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

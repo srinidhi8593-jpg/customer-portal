@@ -559,7 +559,7 @@ export default function CreatePostPage() {
                             {[
                                 { step: '1', label: 'Create & Submit', desc: 'Write your post', active: true },
                                 { step: '2', label: 'Under Review', desc: 'DebatHub team reviews', active: false },
-                                { step: '3', label: 'Published', desc: 'Visible to community', active: false },
+                                { step: '3', label: 'Published', desc: 'Visible to debate forum', active: false },
                             ].map(s => (
                                 <div key={s.step} className="flex items-start space-x-3">
                                     <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 ${s.active ? 'bg-acron-pitch text-acron-yoke-500' : 'bg-gray-200 text-gray-500'}`}>

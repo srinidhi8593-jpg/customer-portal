@@ -45,7 +45,7 @@ export default function LoginPage() {
                             <span className="text-acron-pitch block">DebatHub</span>
                         </h2>
                         <p className="text-gray-300 font-medium leading-relaxed">
-                            Access your resources, connect with the community, and manage your projects.
+                            Access your resources, connect with the debate forum, and manage your projects.
                         </p>
                     </div>
 

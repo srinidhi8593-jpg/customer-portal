@@ -8,7 +8,7 @@ export default function AIChatbot() {
     const { token } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<{ role: 'user' | 'ai', text: string }[]>([
-        { role: 'ai', text: 'Hi there! I am your DebatHub AI assistant. I can answer questions using our community forum knowledge base. How can I help you today?' }
+        { role: 'ai', text: 'Hi there! I am your DebatHub AI assistant. I can answer questions using our debate forum knowledge base. How can I help you today?' }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);

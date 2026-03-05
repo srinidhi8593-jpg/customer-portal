@@ -8,7 +8,7 @@ const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "DebatHub",
-  description: "Community and resources for DebatHub partners",
+  description: "Debate hub and resources for DebatHub partners",
 };
 
 export default function RootLayout({

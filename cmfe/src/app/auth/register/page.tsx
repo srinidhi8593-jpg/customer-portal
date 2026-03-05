@@ -10,7 +10,7 @@ export default function RegisterPage() {
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-acron-pitch/20 rounded-full blur-[60px]" />
                 <div className="relative z-10">
                     <h1 className="text-3xl md:text-4xl font-black tracking-tight">Create Your Account</h1>
-                    <p className="mt-3 text-gray-300 font-medium max-w-xl">Join the DebatHub community and get access to exclusive resources, training modules, and expert support.</p>
+                    <p className="mt-3 text-gray-300 font-medium max-w-xl">Join DebatHub and get access to exclusive resources, training modules, and expert support.</p>
                     <nav className="mt-4 text-sm text-gray-300/80">
                         <Link href="/" className="hover:text-acron-pitch transition-colors">Home</Link> <span className="mx-1">›</span> <span className="text-acron-pitch font-medium">Register</span>
                     </nav>
