@@ -38,6 +38,21 @@ body {
   line-height: 1.6;
 }
 
+/* ─── Global Form Input Fix (Safari/Mobile) ─── */
+/* Prevents Safari from forcing white text on inputs without explicit text colors */
+input,
+textarea,
+select {
+  color: var(--foreground);
+  background-color: var(--background);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+  /* Tailwind gray-400 */
+}
+
 /* Selection Styling */
 ::selection {
   background: rgba(99, 102, 241, 0.2);
