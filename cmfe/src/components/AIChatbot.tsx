@@ -8,7 +8,7 @@ export default function AIChatbot() {
     const { token } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<{ role: 'user' | 'ai', text: string }[]>([
-        { role: 'ai', text: 'Hi there! I am your Echidna AI assistant. I can answer questions using our community forum knowledge base. How can I help you today?' }
+        { role: 'ai', text: 'Hi there! I am your DebatHub AI assistant. I can answer questions using our community forum knowledge base. How can I help you today?' }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -63,7 +63,7 @@ export default function AIChatbot() {
                     <div className="bg-acron-pitch text-white px-5 py-4 flex items-center justify-between">
                         <div className="flex items-center space-x-2">
                             <span className="text-xl">✨</span>
-                            <span className="font-bold">Echidna AI Assistant</span>
+                            <span className="font-bold">DebatHub AI Assistant</span>
                         </div>
                         <button onClick={() => setIsOpen(false)} className="text-white/70 hover:text-white transition-colors">
                             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>

@@ -143,18 +143,18 @@ function ResourcesContent() {
                     </h1>
                     <p className="text-sm text-gray-400 mt-1 font-medium">Browse and download training materials, documentation, and tools</p>
                 </div>
-                <div className="flex items-center gap-3">
-                    <div className="relative">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+                    <div className="relative flex-1 md:flex-none">
                         <svg xmlns="http://www.w3.org/2000/svg" className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                         <input type="text" value={search} onChange={e => setSearch(e.target.value)}
                             onKeyDown={e => e.key === 'Enter' && navigate({ search })}
                             placeholder="Search resources..."
-                            className="input-premium pl-9 pr-4 py-2 rounded-xl text-sm w-64" />
+                            className="input-premium pl-9 pr-4 py-2 rounded-xl text-sm w-full md:w-64" />
                     </div>
                     <select value={sort} onChange={e => { setSort(e.target.value); navigate({ sort: e.target.value }); }}
-                        className="input-premium rounded-xl px-3 py-2 text-sm bg-white text-gray-600 cursor-pointer">
+                        className="input-premium rounded-xl px-3 py-2 text-sm bg-white text-gray-600 cursor-pointer flex-1 md:flex-none">
                         <option value="">Latest First</option>
                         <option value="downloads">Most Downloaded</option>
                         <option value="az">A-Z</option>

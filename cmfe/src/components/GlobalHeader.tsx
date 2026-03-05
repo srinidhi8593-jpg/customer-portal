@@ -42,7 +42,10 @@ export default function GlobalHeader() {
         if (!token) return;
         fetch(`${API_URL}/resources/categories`, {
             headers: { 'Authorization': `Bearer ${token}` }
-        }).then(r => r.json()).then(setResCats).catch(() => { });
+        }).then(r => r.json()).then(data => {
+            if (Array.isArray(data)) setResCats(data);
+            else setResCats([]);
+        }).catch(() => { setResCats([]); });
 
         // Fetch unread notifications badge count
         fetch(`${API_URL}/users/me/notifications?unread=true&limit=1`, {
@@ -84,8 +87,12 @@ export default function GlobalHeader() {
                                 )}
                             </svg>
                         </button>
-                        <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center h-full py-2 group">
-                            <span className="text-white text-lg md:text-xl font-extrabold tracking-tight">Customer Portal</span>
+                        <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center h-full py-2 group gap-2.5">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-acron-pitch group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" />
+                                <path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z" />
+                            </svg>
+                            <span className="text-white text-lg md:text-xl font-extrabold tracking-tight">DebatHub</span>
                         </Link>
 
                     </div>

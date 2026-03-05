@@ -227,7 +227,7 @@ export default function PostDetailPage() {
     const shareEmail = () => {
         if (!post) return;
         const subject = encodeURIComponent(`Check out: ${post.title}`);
-        const body = encodeURIComponent(`I found this post on Echidna Community Portal:\n\n${post.title}\n\n${window.location.href}`);
+        const body = encodeURIComponent(`I found this post on DebatHub:\n\n${post.title}\n\n${window.location.href}`);
         window.open(`mailto:?subject=${subject}&body=${body}`);
     };
 
@@ -413,7 +413,7 @@ export default function PostDetailPage() {
                                 </button>
                             </div>
                             <div ref={commentEditorRef} contentEditable suppressContentEditableWarning
-                                className="min-h-[80px] p-3 text-sm focus:outline-none prose prose-sm max-w-none"
+                                className="min-h-[80px] p-3 text-sm text-gray-900 focus:outline-none prose prose-sm max-w-none"
                                 data-placeholder="Write your comment..." />
                         </div>
                         <style>{`[contenteditable]:empty:before { content: attr(data-placeholder); color: #9ca3af; pointer-events: none; }`}</style>
@@ -498,7 +498,7 @@ export default function PostDetailPage() {
                                                         <div className="mt-3 ml-2 pl-3 border-l-2 border-acron-pitch/30">
                                                             <textarea value={replyContent} onChange={e => setReplyContent(e.target.value)}
                                                                 rows={2} placeholder="Write a reply..."
-                                                                className="w-full border border-gray-300 rounded-lg p-2.5 text-sm focus:border-acron-pitch focus:ring-acron-pitch focus:outline-none" />
+                                                                className="w-full border border-gray-300 rounded-lg p-2.5 text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch focus:outline-none" />
                                                             <div className="flex justify-end space-x-2 mt-2">
                                                                 <button onClick={() => { setReplyingTo(null); setReplyContent(''); }}
                                                                     className="text-xs text-gray-400 hover:text-gray-600 px-3 py-1.5">Cancel</button>

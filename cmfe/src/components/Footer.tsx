@@ -35,7 +35,7 @@ export default function Footer() {
                     <div>
                         <h3 className="text-acron-pitch text-base font-black mb-5 tracking-widest uppercase">Explore</h3>
                         <ul className="space-y-2.5 text-sm text-gray-300 font-medium tracking-wide">
-                            {['Echidna', 'About Us', 'Newsroom'].map(i => (
+                            {['DebatHub', 'About Us', 'Newsroom'].map(i => (
                                 <li key={i}><Link href="#" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">{i}</Link></li>
                             ))}
                         </ul>
@@ -55,7 +55,7 @@ export default function Footer() {
                 {/* Gradient line */}
                 <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-acron-pitch/20 to-transparent" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between text-sm text-gray-400 font-medium">
-                    <p>© 2026 Customer Portal. &middot; <Link href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</Link> &middot; <Link href="#" className="hover:text-white transition-colors duration-300">Terms & Conditions</Link></p>
+                    <p>© 2026 DebatHub. &middot; <Link href="#" className="hover:text-white transition-colors duration-300">Privacy Policy</Link> &middot; <Link href="#" className="hover:text-white transition-colors duration-300">Terms & Conditions</Link></p>
                     <div className="flex space-x-3 mt-4 md:mt-0">
                         {[
                             { icon: 'f', label: 'Facebook' },

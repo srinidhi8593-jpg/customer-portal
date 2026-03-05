@@ -167,7 +167,7 @@ export default function DashboardPage() {
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
                         <p className="text-xs text-gray-300 font-bold uppercase tracking-widest mb-2">{today}</p>
-                        <h1 className="text-3xl md:text-4xl font-black tracking-tight">Welcome back, <span className="text-acron-pitch">{user.name.split(' ')[0]}</span></h1>
+                        <h1 className="text-3xl md:text-4xl font-black tracking-tight">Welcome back, <span className="text-white drop-shadow-md underline decoration-acron-pitch/40 underline-offset-4">{user.name.split(' ')[0]}</span></h1>
                         <p className="text-gray-300 mt-2 font-medium text-sm">Here&apos;s what&apos;s happening in your community today.</p>
                     </div>
                     <Link href="/forum/create" className="hidden md:inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-bold py-3 px-6 rounded-xl hover:bg-white/20 transition-all backdrop-blur-sm active:scale-95">
@@ -243,10 +243,10 @@ export default function DashboardPage() {
                         <div className="px-6 py-4 border-b border-gray-50 bg-gray-50/50">
                             <h3 className="text-xs font-black text-acron-yoke-500 uppercase tracking-widest">Trending Categories</h3>
                         </div>
-                        <div className="p-5 flex flex-wrap gap-2">
+                        <div className="p-5 flex flex-wrap gap-3">
                             {FEATURED_CATEGORIES.map(cat => (
                                 <Link key={cat} href="/forum"
-                                    className="text-[10px] font-bold bg-white text-acron-yoke-500 border border-gray-100 px-3.5 py-2 rounded-xl hover:bg-acron-pitch hover:text-acron-yoke-500 hover:border-acron-pitch hover-lift transition-all duration-300 uppercase tracking-tight">
+                                    className="text-xs font-bold bg-white text-acron-yoke-500 border border-gray-100 px-4 py-2.5 rounded-xl hover:bg-acron-pitch hover:text-acron-yoke-500 hover:border-acron-pitch hover-lift transition-all duration-300 uppercase tracking-tight">
                                     {cat}
                                 </Link>
                             ))}

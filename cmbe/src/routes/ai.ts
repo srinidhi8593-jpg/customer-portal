@@ -85,7 +85,7 @@ router.post('/chat', authenticate, async (req: Request, res: Response) => {
 
         let contextBlock = '';
         if (contextPosts.length > 0) {
-            contextBlock = 'Here are some relevant forum posts from the Echidna Community knowledge base:\n\n';
+            contextBlock = 'Here are some relevant forum posts from the DebatHub Community knowledge base:\n\n';
             contextPosts.forEach((post, index) => {
                 // strip HTML from post content for the context block
                 const plainTextContent = post.content.replace(/<[^>]*>?/gm, '');
@@ -95,11 +95,11 @@ router.post('/chat', authenticate, async (req: Request, res: Response) => {
             contextBlock = 'No highly relevant specific forum posts were found, but you can answer generally based on your knowledge if applicable.';
         }
 
-        const systemInstruction = `You are a helpful and polite AI assistant for the Echidna Customer Portal.
+        const systemInstruction = `You are a helpful and polite AI assistant for DebatHub.
 You help users by answering their questions, drawing primarily from the knowledge within the community forum posts provided in the context below.
 Always try to use the provided context to answer the question. If you use information from a post, mention that you found it in the community forum.
 If the context does not contain the answer, politely inform the user that you don't have that specific information in the current community knowledge base, but help them as best as you can.
-Do not invent information about Echidna products that is not supported by the context.
+Do not invent information about DebatHub products that is not supported by the context.
 Return your response formatted in Markdown.
 
 --- CONTEXT ---

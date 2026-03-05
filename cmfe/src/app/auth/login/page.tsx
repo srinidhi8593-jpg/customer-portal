@@ -42,7 +42,7 @@ export default function LoginPage() {
                         <span style={{ display: 'none' }} className="h-10 w-auto mb-8 opacity-90" />
                         <h2 className="text-3xl font-black tracking-tight leading-tight mb-4">
                             Welcome back to your
-                            <span className="text-acron-pitch block">Customer Portal</span>
+                            <span className="text-acron-pitch block">DebatHub</span>
                         </h2>
                         <p className="text-gray-300 font-medium leading-relaxed">
                             Access your resources, connect with the community, and manage your projects.

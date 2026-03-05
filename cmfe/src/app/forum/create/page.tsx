@@ -252,7 +252,7 @@ export default function CreatePostPage() {
                         </svg>
                     </div>
                     <h2 className="text-xl font-bold text-acron-yoke-500 mb-2">Post Submitted for Review</h2>
-                    <p className="text-sm text-gray-500 max-w-sm mx-auto">Your post has been submitted and is awaiting review by the Echidna team. You&apos;ll be notified once it&apos;s approved.</p>
+                    <p className="text-sm text-gray-500 max-w-sm mx-auto">Your post has been submitted and is awaiting review by the DebatHub team. You&apos;ll be notified once it&apos;s approved.</p>
                     <div className="mt-6 flex justify-center space-x-3">
                         <Link href="/dashboard" className="bg-acron-pitch text-acron-yoke-500 font-bold py-2 px-6 rounded-lg text-sm hover:bg-acron-pitch transition-all">Go to Dashboard</Link>
                         <Link href="/forum" className="bg-gray-100 text-gray-700 font-medium py-2 px-6 rounded-lg text-sm hover:bg-gray-200 transition-all">Browse Forum</Link>
@@ -290,7 +290,7 @@ export default function CreatePostPage() {
                 {error && <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">{error}</div>}
 
                 <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 px-4 py-2.5 rounded-lg text-xs font-medium">
-                    🔒 This is a preview. Your post will not be publicly visible until approved by the Echidna team.
+                    🔒 This is a preview. Your post will not be publicly visible until approved by the DebatHub team.
                 </div>
 
                 <article className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -377,7 +377,7 @@ export default function CreatePostPage() {
                                 Post Title<span className="text-red-500">*</span>
                             </label>
                             <input type="text" required value={title} onChange={e => setTitle(e.target.value)} maxLength={200}
-                                className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm focus:border-acron-pitch focus:ring-acron-pitch"
+                                className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch"
                                 placeholder="Enter a clear, descriptive title for your post" />
                             <p className="text-xs text-gray-400 mt-1 text-right">{title.length}/200</p>
                         </div>
@@ -386,7 +386,7 @@ export default function CreatePostPage() {
                         <div>
                             <label className="block text-sm font-semibold text-acron-yoke-500 mb-1.5">Category</label>
                             <select value={categoryId} onChange={e => setCategoryId(e.target.value)}
-                                className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm focus:border-acron-pitch focus:ring-acron-pitch bg-white">
+                                className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch bg-white">
                                 <option value="">Select a category</option>
                                 {categories.map((c: { id: string; name: string }) => <option key={c.id} value={c.id}>{c.name}</option>)}
                             </select>
@@ -454,7 +454,7 @@ export default function CreatePostPage() {
 
                                 <div ref={editorRef} contentEditable suppressContentEditableWarning
                                     onInput={syncContent} onBlur={syncContent}
-                                    className="w-full p-4 text-sm focus:outline-none min-h-[280px] leading-relaxed overflow-y-auto max-h-[500px] prose prose-sm max-w-none relative"
+                                    className="w-full p-4 text-sm text-gray-900 focus:outline-none min-h-[280px] leading-relaxed overflow-y-auto max-h-[500px] prose prose-sm max-w-none relative"
                                     data-placeholder="Write your post content here. Share your knowledge, ask questions, or start a discussion..." />
                             </div>
                             <style>{`[contenteditable]:empty:before { content: attr(data-placeholder); color: #9ca3af; pointer-events: none; }`}</style>
@@ -475,7 +475,7 @@ export default function CreatePostPage() {
                                 {tags.length < 10 && (
                                     <input type="text" value={tagInput} onChange={e => setTagInput(e.target.value)}
                                         onKeyDown={handleTagKeyDown} onBlur={addTag}
-                                        className="flex-1 min-w-[120px] text-sm border-none outline-none p-1 focus:ring-0"
+                                        className="flex-1 min-w-[120px] text-sm text-gray-900 border-none outline-none p-1 focus:ring-0"
                                         placeholder={tags.length === 0 ? 'e.g. Discussion, Help, Best Practices' : 'Add tag...'} />
                                 )}
                             </div>
@@ -558,7 +558,7 @@ export default function CreatePostPage() {
                         <div className="space-y-3">
                             {[
                                 { step: '1', label: 'Create & Submit', desc: 'Write your post', active: true },
-                                { step: '2', label: 'Under Review', desc: 'Echidna team reviews', active: false },
+                                { step: '2', label: 'Under Review', desc: 'DebatHub team reviews', active: false },
                                 { step: '3', label: 'Published', desc: 'Visible to community', active: false },
                             ].map(s => (
                                 <div key={s.step} className="flex items-start space-x-3">

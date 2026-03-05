@@ -104,12 +104,12 @@ export default function UserRegisterPage() {
                             <div>
                                 <label className="block text-sm font-semibold text-acron-yoke-500 mb-1.5">First Name<span className="text-red-500">*</span></label>
                                 <input type="text" required value={firstName} onChange={e => setFirstName(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Jane" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Jane" />
                             </div>
                             <div>
                                 <label className="block text-sm font-semibold text-acron-yoke-500 mb-1.5">Last Name<span className="text-red-500">*</span></label>
                                 <input type="text" required value={lastName} onChange={e => setLastName(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Doe" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Doe" />
                             </div>
                         </div>
 
@@ -118,12 +118,12 @@ export default function UserRegisterPage() {
                             <div>
                                 <label className="block text-sm font-semibold text-acron-yoke-500 mb-1.5">Title</label>
                                 <input type="text" value={title} onChange={e => setTitle(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Title" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Title" />
                             </div>
                             <div>
                                 <label className="block text-sm font-semibold text-acron-yoke-500 mb-1.5">Email Address<span className="text-red-500">*</span></label>
                                 <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="jane.doe@business.com" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="jane.doe@business.com" />
                             </div>
                         </div>
 
@@ -132,12 +132,12 @@ export default function UserRegisterPage() {
                             <div>
                                 <label className="block text-sm font-semibold text-acron-yoke-500 mb-1.5">My Organization Name<span className="text-red-500">*</span></label>
                                 <input type="text" required value={company} onChange={e => setCompany(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="My Company" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="My Company" />
                             </div>
                             <div>
                                 <label className="block text-sm font-semibold text-acron-yoke-500 mb-1.5">Location<span className="text-red-500">*</span></label>
                                 <input type="text" required value={location} onChange={e => setLocation(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="London" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-3 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="London" />
                             </div>
                         </div>
 
@@ -146,13 +146,13 @@ export default function UserRegisterPage() {
                             <label className="block text-sm font-semibold text-acron-yoke-500 mb-1.5">Phone Number<span className="text-red-500">*</span></label>
                             <div className="flex">
                                 <select value={phoneCountry} onChange={e => setPhoneCountry(e.target.value)}
-                                    className="rounded-l-lg border border-r-0 border-gray-300 shadow-sm p-3 pr-2 text-sm focus:border-acron-pitch focus:ring-acron-pitch bg-white w-24">
+                                    className="rounded-l-lg border border-r-0 border-gray-300 shadow-sm p-3 pr-2 text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch bg-white w-24">
                                     {PHONE_COUNTRIES.map(c => (
                                         <option key={c.code} value={c.code}>{c.flag} {c.dial}</option>
                                     ))}
                                 </select>
                                 <input type="tel" required value={phone} onChange={e => setPhone(e.target.value)}
-                                    className="flex-1 rounded-r-lg border border-gray-300 shadow-sm p-3 text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="(555) 123 4567" />
+                                    className="flex-1 rounded-r-lg border border-gray-300 shadow-sm p-3 text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="(555) 123 4567" />
                             </div>
                         </div>
 

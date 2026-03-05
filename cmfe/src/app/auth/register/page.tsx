@@ -10,7 +10,7 @@ export default function RegisterPage() {
                 <div className="absolute -top-10 -right-10 w-40 h-40 bg-acron-pitch/20 rounded-full blur-[60px]" />
                 <div className="relative z-10">
                     <h1 className="text-3xl md:text-4xl font-black tracking-tight">Create Your Account</h1>
-                    <p className="mt-3 text-gray-300 font-medium max-w-xl">Join the Echidna community and get access to exclusive resources, training modules, and expert support.</p>
+                    <p className="mt-3 text-gray-300 font-medium max-w-xl">Join the DebatHub community and get access to exclusive resources, training modules, and expert support.</p>
                     <nav className="mt-4 text-sm text-gray-300/80">
                         <Link href="/" className="hover:text-acron-pitch transition-colors">Home</Link> <span className="mx-1">›</span> <span className="text-acron-pitch font-medium">Register</span>
                     </nav>
@@ -34,7 +34,7 @@ export default function RegisterPage() {
                         </div>
                     </div>
 
-                    <p className="text-sm text-gray-500 mt-4 mb-6 leading-relaxed relative z-10">Request individual access to the Customer Portal. Your request will be manually reviewed and assigned to an organization by an administrator.</p>
+                    <p className="text-sm text-gray-500 mt-4 mb-6 leading-relaxed relative z-10">Request individual access to DebatHub. Your request will be manually reviewed and assigned to an organization by an administrator.</p>
                     <Link href="/auth/register/user" className="relative z-10 inline-flex items-center gap-2 bg-acron-pitch text-acron-yoke-500 font-bold py-3 px-6 rounded-xl hover:bg-acron-yoke-500 hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg active:scale-95 text-sm">
                         Register as User
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>

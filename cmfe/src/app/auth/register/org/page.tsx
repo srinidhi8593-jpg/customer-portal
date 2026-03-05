@@ -53,17 +53,17 @@ const AddressSection = ({
                 <div>
                     <label className="block text-xs font-medium text-gray-500 mb-1">Organization Name*</label>
                     <input type="text" required value={data.company} onChange={e => setData({ ...data, company: e.target.value })}
-                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Organization Name" />
+                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Organization Name" />
                 </div>
                 <div>
                     <label className="block text-xs font-medium text-gray-500 mb-1">Phone Number*</label>
                     <input type="tel" required value={data.phone} onChange={e => setData({ ...data, phone: e.target.value })}
-                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="(555) 123-4567" />
+                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="(555) 123-4567" />
                 </div>
                 <div>
                     <label className="block text-xs font-medium text-gray-500 mb-1">Email Address*</label>
                     <input type="email" required value={data.email} onChange={e => setData({ ...data, email: e.target.value })}
-                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Email Address" />
+                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Email Address" />
                 </div>
             </div>
 
@@ -72,17 +72,17 @@ const AddressSection = ({
                 <div>
                     <label className="block text-xs font-medium text-gray-500 mb-1">Address Line 1*</label>
                     <input type="text" required value={data.addressLine1} onChange={e => setData({ ...data, addressLine1: e.target.value })}
-                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Address Line 1" />
+                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Address Line 1" />
                 </div>
                 <div>
                     <label className="block text-xs font-medium text-gray-500 mb-1">Address Line 2</label>
                     <input type="text" value={data.addressLine2} onChange={e => setData({ ...data, addressLine2: e.target.value })}
-                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Address Line 2" />
+                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Address Line 2" />
                 </div>
                 <div>
                     <label className="block text-xs font-medium text-gray-500 mb-1">Country*</label>
                     <select required value={data.country} onChange={e => setData({ ...data, country: e.target.value })}
-                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch bg-white">
+                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch bg-white">
                         <option value="">Choose</option>
                         {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
                     </select>
@@ -92,17 +92,17 @@ const AddressSection = ({
                 <div>
                     <label className="block text-xs font-medium text-gray-500 mb-1">Zip Code*</label>
                     <input type="text" required value={data.zipCode} onChange={e => setData({ ...data, zipCode: e.target.value })}
-                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Zip Code" />
+                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Zip Code" />
                 </div>
                 <div>
                     <label className="block text-xs font-medium text-gray-500 mb-1">City*</label>
                     <input type="text" required value={data.city} onChange={e => setData({ ...data, city: e.target.value })}
-                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="City" />
+                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="City" />
                 </div>
                 <div>
                     <label className="block text-xs font-medium text-gray-500 mb-1">State*</label>
                     <input type="text" required value={data.state} onChange={e => setData({ ...data, state: e.target.value })}
-                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="State" />
+                        className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="State" />
                 </div>
             </div>
 
@@ -248,7 +248,7 @@ export default function OrgRegisterPage() {
 
             {/* Form */}
             <div className="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
-                <p className="text-sm text-gray-600 mb-6">Welcome! To gain access to our customer portal, your organization must first complete a quick registration.</p>
+                <p className="text-sm text-gray-600 mb-6">Welcome! To gain access to DebatHub, your organization must first complete a quick registration.</p>
 
                 {error && (
                     <div className="mb-6 bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">{error}</div>
@@ -281,12 +281,12 @@ export default function OrgRegisterPage() {
                             <div>
                                 <label className="block text-xs font-medium text-gray-500 mb-1">Carrier</label>
                                 <input type="text" value={carrier} onChange={e => setCarrier(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Carrier" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Carrier" />
                             </div>
                             <div>
                                 <label className="block text-xs font-medium text-gray-500 mb-1">Account Number*</label>
                                 <input type="text" value={carrierAccountNumber} onChange={e => setCarrierAccountNumber(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Account Number" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Account Number" />
                             </div>
                         </div>
                     </section>
@@ -299,35 +299,35 @@ export default function OrgRegisterPage() {
                             <div>
                                 <label className="block text-xs font-medium text-gray-500 mb-1">Name*</label>
                                 <input type="text" required value={adminName} onChange={e => setAdminName(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Name" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Name" />
                             </div>
                             <div>
                                 <label className="block text-xs font-medium text-gray-500 mb-1">Phone Number*</label>
                                 <input type="tel" required value={adminPhone} onChange={e => setAdminPhone(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="(555) 123-4567" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="(555) 123-4567" />
                             </div>
                             <div>
                                 <label className="block text-xs font-medium text-gray-500 mb-1">Email Address*</label>
                                 <input type="email" required value={adminEmail} onChange={e => setAdminEmail(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Email Address" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Email Address" />
                             </div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                             <div>
                                 <label className="block text-xs font-medium text-gray-500 mb-1">Title</label>
                                 <input type="text" value={adminTitle} onChange={e => setAdminTitle(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Title" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Title" />
                             </div>
                             <div>
                                 <label className="block text-xs font-medium text-gray-500 mb-1">Fax</label>
                                 <input type="text" value={adminFax} onChange={e => setAdminFax(e.target.value)}
-                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Fax" />
+                                    className="block w-full rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch" placeholder="Fax" />
                             </div>
                         </div>
                         <div className="mt-4">
                             <label className="block text-xs font-medium text-gray-500 mb-1">Full Postal/order</label>
                             <select value={adminCountry} onChange={e => setAdminCountry(e.target.value)}
-                                className="block w-full md:w-1/3 rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm focus:border-acron-pitch focus:ring-acron-pitch bg-white">
+                                className="block w-full md:w-1/3 rounded-lg border-gray-300 shadow-sm p-2.5 border text-sm text-gray-900 focus:border-acron-pitch focus:ring-acron-pitch bg-white">
                                 {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
                             </select>
                         </div>

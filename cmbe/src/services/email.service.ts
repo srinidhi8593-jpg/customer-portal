@@ -26,7 +26,7 @@ export const sendEmail = async (to: string, templateKey: string, variables: Reco
         });
 
         await transporter.sendMail({
-            from: '"Echidna Portal" <no-reply@echidna.com>',
+            from: '"DebatHub" <no-reply@debathub.com>',
             to,
             subject,
             text: bodyText,

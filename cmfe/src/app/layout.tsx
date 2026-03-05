@@ -7,8 +7,8 @@ import { AuthProvider } from "@/context/AuthContext";
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Echidna Community Portal",
-  description: "Community and resources for Echidna partners",
+  title: "DebatHub",
+  description: "Community and resources for DebatHub partners",
 };
 
 export default function RootLayout({
