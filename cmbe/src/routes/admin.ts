@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { authenticate, authorize } from '../middlewares/rbac';
 import prisma from '../db';
-import { sendEmail } from '../services/email.service';
+import { sendEmail, sendPostApprovedEmail, sendPostRejectedEmail } from '../services/email.service';
 import multer from 'multer';
 import { storageService } from '../services/storage.service';
 
@@ -198,7 +198,7 @@ router.put('/posts/:id/approve', authenticate, authorize(['BUSINESS_ADMIN']), as
             data: { status: 'PUBLISHED' }
         });
 
-        // Notify author
+        // Notify author via in-app notification
         await prisma.notification.create({
             data: {
                 userId: post.authorId,
@@ -206,6 +206,12 @@ router.put('/posts/:id/approve', authenticate, authorize(['BUSINESS_ADMIN']), as
                 link: `/forum/${post.id}`
             }
         });
+
+        // Send approval email to author
+        const author = await prisma.user.findUnique({ where: { id: post.authorId }, select: { email: true, name: true } });
+        if (author?.email) {
+            sendPostApprovedEmail(author.email, author.name, post.title, post.id).catch(() => { });
+        }
 
         // Notify followers of category
         if (post.categoryId) {
@@ -246,6 +252,12 @@ router.put('/posts/:id/reject', authenticate, authorize(['BUSINESS_ADMIN']), asy
                 link: `/forum/${post.id}`
             }
         });
+
+        // Send rejection email to author
+        const author = await prisma.user.findUnique({ where: { id: post.authorId }, select: { email: true, name: true } });
+        if (author?.email) {
+            sendPostRejectedEmail(author.email, author.name, post.title, reason || '').catch(() => { });
+        }
 
         res.json(post);
     } catch (err) {

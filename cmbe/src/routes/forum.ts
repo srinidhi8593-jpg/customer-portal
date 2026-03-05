@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import { authenticate, authorize } from '../middlewares/rbac';
 import prisma from '../db';
+import { sendPostSubmittedEmail } from '../services/email.service';
 
 const router = express.Router();
 
@@ -123,6 +124,12 @@ router.post('/posts', authenticate, authorize(['BUSINESS_ADMIN', 'ORG_ADMIN', 'P
         }
 
         const post = await prisma.post.create({ data });
+
+        // Send submission confirmation email (non-blocking)
+        const author = await prisma.user.findUnique({ where: { id: user.id }, select: { email: true, name: true } });
+        if (author?.email) {
+            sendPostSubmittedEmail(author.email, author.name, title).catch(() => { });
+        }
 
         res.status(201).json(post);
     } catch (err) {
