@@ -8,7 +8,22 @@ const router = express.Router();
 // List all categories (public)
 router.get('/categories', async (req: Request, res: Response) => {
     try {
-        const categories = await prisma.forumCategory.findMany({ orderBy: { name: 'asc' } });
+        let categories = await prisma.forumCategory.findMany({ orderBy: { name: 'asc' } });
+
+        // Auto-seed if empty (fixes missing categories in production)
+        if (categories.length === 0) {
+            const DEFAULT_CATEGORIES = [
+                'General Discussion', 'Help & Support', 'Announcements',
+                'Best Practices', 'Product Updates', 'Feature Requests',
+                'Debates', 'News & Trends'
+            ];
+            await prisma.forumCategory.createMany({
+                data: DEFAULT_CATEGORIES.map(name => ({ name })),
+                skipDuplicates: true
+            });
+            categories = await prisma.forumCategory.findMany({ orderBy: { name: 'asc' } });
+        }
+
         res.json(categories);
     } catch (err) {
         res.status(500).json({ error: 'Server error' });
